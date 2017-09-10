@@ -28,13 +28,14 @@ def read_batch(src):
             data = pickle.load(f, encoding='latin1')
     return data
 
-def download_cifar(src="http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"):
+def download_cifar_old(src="http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"):
     '''Load the training and testing data
     '''
     print ('Downloading ' + src)
     fname, h = urlretrieve(src, './delete.me')
     print ('Done.')
     try:
+
         print ('Extracting files...')
         with tarfile.open(fname) as tar:
             tar.extractall()
@@ -50,6 +51,34 @@ def download_cifar(src="http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz")
         print ('Done.')
     finally:
         os.remove(fname)
+    return x_train, x_test, y_train, y_test
+
+def download_cifar(src="http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz"):
+    '''Load the training and testing data
+    '''
+    if not os.path.isdir('./cifar-10-batches-py'):
+        print ('Downloading ' + src)
+        fname, h = urlretrieve(src, './delete.me')
+        print ('Done.')
+        try:
+
+            print ('Extracting files...')
+            with tarfile.open(fname) as tar:
+                tar.extractall()
+            print ('Done.')
+        finally:
+            os.remove(fname)
+
+    print ('Preparing train set...')
+    train_list = [read_batch('./cifar-10-batches-py/data_batch_{0}'.format(i + 1)) for i in range(5)]
+    x_train = np.concatenate([t['data'] for t in train_list])
+    y_train = np.concatenate([t['labels'] for t in train_list])       
+    print ('Preparing test set...')
+    tst = read_batch('./cifar-10-batches-py/test_batch')
+    x_test = tst['data']
+    y_test = np.asarray(tst['labels'])
+    print ('Done.')
+
     return x_train, x_test, y_train, y_test
 
 def cifar_for_library(channel_first=True, one_hot=False): 
