@@ -1,6 +1,6 @@
 #!/bin/bash
 
-out_dir="results/$(date +%Y_%m_%d_%H_%M)"
+out_dir="results/$(date +%Y_%m_%d_%H_%M_%S)"
 if [ ! -d ${out_dir} ]
 	then
 		mkdir -p ${out_dir}
