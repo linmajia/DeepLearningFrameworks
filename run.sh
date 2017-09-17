@@ -13,10 +13,8 @@ for i in "${array[@]}"
 do
 	echo Test $n: $i
 	echo ""
-	if ! [ -f ${i}_CIFAR.py ]
-		then
-			ipython nbconvert --to python ${i}_CIFAR.ipynb
-	fi
+	rm -f ${i}_CIFAR.py
+	ipython nbconvert --to python ${i}_CIFAR.ipynb
 	log_file="${out_dir}/${i}_CIFAR.log"
 	rm -f ${log_file}
 	ipython ${i}_CIFAR.py 2>&1 | tee ${log_file}
