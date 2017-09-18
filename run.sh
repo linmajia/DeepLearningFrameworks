@@ -40,7 +40,7 @@ do
     ipython nbconvert --to python "${cwd}/${i}_CIFAR.ipynb" >/dev/null 2>&1
     log_file="${out_dir}/${i}_CIFAR.log"
     rm -f ${log_file}
-    #ipython ${i}_CIFAR.py 2>&1 | tee ${log_file}
+    ipython ${i}_CIFAR.py 2>&1 | tee ${log_file}
     let n=n+1
     echo -e "\n"
 done
