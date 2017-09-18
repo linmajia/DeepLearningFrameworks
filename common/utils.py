@@ -35,7 +35,6 @@ def download_cifar_old(src="http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.
     fname, h = urlretrieve(src, './delete.me')
     print ('Done.')
     try:
-
         print ('Extracting files...')
         with tarfile.open(fname) as tar:
             tar.extractall()
@@ -61,7 +60,6 @@ def download_cifar(src="http://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz")
         fname, h = urlretrieve(src, './delete.me')
         print ('Done.')
         try:
-
             print ('Extracting files...')
             with tarfile.open(fname) as tar:
                 tar.extractall()
