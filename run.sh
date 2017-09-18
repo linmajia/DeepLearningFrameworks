@@ -36,11 +36,11 @@ do
     echo -e "\n"
     echo Test $n: $i
     echo -e "\n"
-    rm -f "${cwd}/${i}_CIFAR.py"
-    ipython nbconvert --to python "${cwd}/${i}_CIFAR.ipynb" >/dev/null 2>&1
+    #rm -f "${cwd}/${i}_CIFAR.py"
+    ipython nbconvert --to python "${cwd}/${i}_CIFAR.ipynb" --output-dir="${out_dir}" >/dev/null 2>&1
     log_file="${out_dir}/${i}_CIFAR.log"
     rm -f ${log_file}
-    ipython ${i}_CIFAR.py 2>&1 | tee ${log_file}
+    ipython "${out_dir}/${i}_CIFAR.py" 2>&1 | tee ${log_file}
     let n=n+1
     echo -e "\n"
 done
