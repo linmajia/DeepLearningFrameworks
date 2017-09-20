@@ -23,7 +23,7 @@ case "$(uname -s)" in
 esac
 
 gpu=$(python -m pip show tensorflow-gpu)
-if [ "${gpu}" == "" ]; then
+if [ "${gpu}" != "" ]; then
     test_array+=(Tensorflow)
 else
     test_array+=(Tensorflow_NHWC)
